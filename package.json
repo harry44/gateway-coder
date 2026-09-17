@@ -2,7 +2,7 @@
   "name": "gateway-coder",
   "version": "1.0.0",
   "description": "Desktop coding agent for the company LiteLLM gateway",
-  "author": "Harry",
+  "author": "Harry <harry@example.com>",
   "main": "./out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
