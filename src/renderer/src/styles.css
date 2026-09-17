@@ -848,6 +848,87 @@ button {
   padding: 4px 0;
 }
 
+/* Browser Panel */
+.browser-panel {
+  position: fixed;
+  top: 48px;
+  right: 0;
+  bottom: 68px;
+  width: 420px;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  animation: slideIn 0.2s ease;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.browser-btn {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 14px;
+  min-width: 36px;
+}
+.browser-btn:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.browser-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.browser-url {
+  flex: 1;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text);
+  font-size: 12px;
+  font-family: inherit;
+}
+.browser-url:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.browser-loading {
+  font-size: 11px;
+  color: var(--amber);
+  padding: 0 8px;
+}
+.browser-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.browser-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: var(--bg);
+}
+
+/* Responsive: adjust main content when browser is open */
+.app.has-browser .main {
+  margin-right: 420px;
+}
+
 /* Scrollbars */
 ::-webkit-scrollbar {
   width: 10px;

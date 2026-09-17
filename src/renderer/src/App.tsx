@@ -7,6 +7,7 @@ import Composer from './components/Composer'
 import Markdown from './components/Markdown'
 import ToolCard from './components/ToolCard'
 import SettingsModal from './components/SettingsModal'
+import BrowserPanel from './components/BrowserPanel'
 import { useTurn, type LiveItem } from './lib/useTurn'
 
 const genId = (): string => `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
@@ -44,6 +45,8 @@ export default function App(): JSX.Element {
   const [convoUsage, setConvoUsage] = useState<Usage>({ input_tokens: 0, output_tokens: 0 })
   const [error, setError] = useState<string | null>(null)
   const [modelToast, setModelToast] = useState<string | null>(null)
+  const [showBrowser, setShowBrowser] = useState(false)
+  const [browserUrl, setBrowserUrl] = useState('https://www.google.com')
 
   const createdAtRef = useRef<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -190,7 +193,7 @@ const send = useCallback((text: string, images?: { dataUrl: string; mediaType: s
   const cost = settings ? computeCost(settings.models, model, convoUsage) : null
 
   return (
-    <div className="app">
+    <div className={`app ${showBrowser ? 'has-browser' : ''}`}>
       <Sidebar
         conversations={conversations}
         activeId={activeId}
@@ -222,6 +225,9 @@ const send = useCallback((text: string, images?: { dataUrl: string; mediaType: s
             <span className="cost" title="Cumulative for this conversation">
               {formatUsd(cost)} · {convoUsage.input_tokens + convoUsage.output_tokens} tok
             </span>
+            <button className="icon-btn" title={showBrowser ? 'Hide browser' : 'Show browser'} onClick={() => setShowBrowser(!showBrowser)} type="button">
+              🌐
+            </button>
             <button className="icon-btn" title="Settings" onClick={() => setShowSettings(true)} type="button">
               ⚙
             </button>
@@ -294,6 +300,8 @@ const send = useCallback((text: string, images?: { dataUrl: string; mediaType: s
             )}
           </div>
         </div>
+
+        <BrowserPanel isOpen={showBrowser} onClose={() => setShowBrowser(false)} initialUrl={browserUrl} />
 
         {error && (
           <div className="error-banner" onClick={() => setError(null)}>

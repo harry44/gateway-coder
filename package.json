@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "package": "electron-vite build && electron-builder --win"
+    "package": "electron-vite build && electron-builder --win --mac --linux"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.32.1",
@@ -56,6 +56,22 @@
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "artifactName": "${productName}-${version}.${ext}",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "artifactName": "${productName}-${version}.${ext}",
+      "category": "Development"
     }
   }
 }
