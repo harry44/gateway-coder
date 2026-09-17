@@ -1,0 +1,61 @@
+{
+  "name": "gateway-coder",
+  "version": "1.0.0",
+  "description": "Desktop coding agent for the company LiteLLM gateway",
+  "author": "Harry",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "electron-vite build && electron-builder --win"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.32.1",
+    "diff": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/diff": "6.0.0",
+    "@types/node": "20.17.9",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.4",
+    "electron": "33.3.1",
+    "electron-builder": "25.1.8",
+    "electron-vite": "2.3.0",
+    "highlight.js": "11.11.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-markdown": "9.0.1",
+    "rehype-highlight": "7.0.1",
+    "remark-gfm": "4.0.0",
+    "typescript": "5.7.2",
+    "vite": "5.4.11",
+    "vitest": "2.1.8"
+  },
+  "build": {
+    "appId": "com.harna.gatewaycoder",
+    "productName": "Gateway Coder",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
