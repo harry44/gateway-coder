@@ -187,6 +187,11 @@ export default function Composer({ disabled, running, onSend, onStop }: Props): 
     setFiles([])
   }
 
+  const handleContextMenu = (e: any): void => {
+    // Let browser show native spellcheck suggestions on right-click
+    // The browser automatically handles misspelled words with spellCheck={true}
+  }
+
   const removeImage = (index: number): void => {
     setImages((prev) => prev.filter((_, i) => i !== index))
   }
@@ -198,6 +203,7 @@ export default function Composer({ disabled, running, onSend, onStop }: Props): 
           ref={editorRef}
           className={`editor ${dragActive ? 'drag-active' : ''}`}
           contentEditable={!disabled}
+          spellCheck={true}
           onPaste={handlePaste}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
@@ -206,6 +212,7 @@ export default function Composer({ disabled, running, onSend, onStop }: Props): 
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
+          onContextMenu={handleContextMenu}
           tabIndex={disabled ? -1 : 0}
           data-placeholder={disabled ? 'Open a workspace folder and set your key to start…' : 'Ask about your code, or describe a change…  (Enter to send, Shift+Enter for newline)'}
         />

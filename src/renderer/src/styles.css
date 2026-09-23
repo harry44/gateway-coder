@@ -550,6 +550,16 @@ button {
 .editor:focus {
   border-color: var(--accent);
 }
+.editor[spellcheck="true"] {
+  /* Browser will underline misspelled words in red automatically */
+}
+.editor ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+.editor:focus {
+  border-color: var(--accent);
+}
 .editor[contenteditable="false"] {
   opacity: 0.6;
 }
